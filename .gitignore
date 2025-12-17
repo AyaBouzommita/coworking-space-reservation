@@ -1,0 +1,51 @@
+# Compiled class files
+*.class
+/target/
+/build/
+/bin/
+
+# Log files
+*.log
+
+# Eclipse specific files
+.settings/
+.metadata/
+.recommenders/
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+
+# NetBeans
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+
+# VS Code
+.vscode/
+
+# OS specific files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+*~
+
+# Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+
+# Server specific
+/servers/
+/.metadata/
