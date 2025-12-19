@@ -41,6 +41,9 @@
                         <c:remove var="successMessage" scope="session" />
                     </c:if>
 
+                    <!-- Statistiques -->
+
+
                     <!-- Salles -->
                     <section class="card" style="margin-bottom: 2rem;">
                         <div
@@ -180,15 +183,15 @@
 
                         <c:if test="${not empty reservations}">
                             <div class="table-wrapper">
-                                <table class="table">
+                                <table class="table" id="reservationsTable">
                                     <thead>
                                         <tr>
-                                            <th>ID</th>
-                                            <th>User ID</th>
-                                            <th>Room ID</th>
-                                            <th>Début</th>
-                                            <th>Fin</th>
-                                            <th>Statut</th>
+                                            <th onclick="sortTable(0)" style="cursor: pointer;">ID ⇅</th>
+                                            <th onclick="sortTable(1)" style="cursor: pointer;">User ID ⇅</th>
+                                            <th onclick="sortTable(2)" style="cursor: pointer;">Room ID ⇅</th>
+                                            <th onclick="sortTable(3)" style="cursor: pointer;">Début ⇅</th>
+                                            <th onclick="sortTable(4)" style="cursor: pointer;">Fin ⇅</th>
+                                            <th onclick="sortTable(5)" style="cursor: pointer;">Statut ⇅</th>
                                             <th>Actions</th>
                                         </tr>
                                     </thead>
@@ -231,6 +234,53 @@
 
                 </div>
             </div>
+
+            <script>
+                function sortTable(n) {
+                    var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+                    table = document.getElementById("reservationsTable");
+                    switching = true;
+                    dir = "asc";
+                    while (switching) {
+                        switching = false;
+                        rows = table.rows;
+                        for (i = 1; i < (rows.length - 1); i++) {
+                            shouldSwitch = false;
+                            x = rows[i].getElementsByTagName("TD")[n];
+                            y = rows[i + 1].getElementsByTagName("TD")[n];
+                            var xContent = x.innerHTML.toLowerCase();
+                            var yContent = y.innerHTML.toLowerCase();
+
+                            // Check if numeric
+                            var xNum = parseFloat(xContent);
+                            var yNum = parseFloat(yContent);
+                            if (!isNaN(xNum) && !isNaN(yNum)) {
+                                if (dir == "asc") {
+                                    if (xNum > yNum) { shouldSwitch = true; break; }
+                                } else if (dir == "desc") {
+                                    if (xNum < yNum) { shouldSwitch = true; break; }
+                                }
+                            } else {
+                                if (dir == "asc") {
+                                    if (xContent > yContent) { shouldSwitch = true; break; }
+                                } else if (dir == "desc") {
+                                    if (xContent < yContent) { shouldSwitch = true; break; }
+                                }
+                            }
+                        }
+                        if (shouldSwitch) {
+                            rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                            switching = true;
+                            switchcount++;
+                        } else {
+                            if (switchcount == 0 && dir == "asc") {
+                                dir = "desc";
+                                switching = true;
+                            }
+                        }
+                    }
+                }
+            </script>
         </body>
 
         </html>

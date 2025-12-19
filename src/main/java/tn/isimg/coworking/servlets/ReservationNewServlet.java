@@ -116,7 +116,16 @@ public class ReservationNewServlet extends HttpServlet {
 
             boolean ok = reservationDao.create(r);
             if (ok) {
-                request.setAttribute("successMessage", "Réservation créée avec succès.");
+                // Send confirmation email
+                tn.isimg.coworking.utils.EmailService emailService = new tn.isimg.coworking.utils.EmailService();
+                // set the Room Name for the email
+                
+                if (room != null)
+                    r.setRoomName(room.getName());
+                emailService.sendReservationConfirmation(currentUser, r);
+
+                request.setAttribute("successMessage",
+                        "Réservation créée avec succès. Un email de confirmation a été envoyé.");
             } else {
                 request.setAttribute("errorMessage",
                         "Impossible de créer la réservation : le créneau est déjà pris. " +

@@ -21,7 +21,9 @@
 
                             <c:if test="${sessionScope.currentUser.role == 'ADMIN'}">
                                 <a href="${pageContext.request.contextPath}/admin/dashboard"
-                                    class="nav-link ${param.activePage == 'admin' ? 'active' : ''}">Admin</a>
+                                    class="nav-link ${param.activePage == 'admin' ? 'active' : ''}">Tableau de bord</a>
+                                <a href="${pageContext.request.contextPath}/admin/statistics"
+                                    class="nav-link ${param.activePage == 'statistics' ? 'active' : ''}">Statistiques</a>
                             </c:if>
 
                             <a href="${pageContext.request.contextPath}/reservations/mine"

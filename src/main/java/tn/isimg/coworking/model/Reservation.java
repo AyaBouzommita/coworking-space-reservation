@@ -10,12 +10,12 @@ public class Reservation implements Serializable {
     private int id;
     private int userId;
     private int roomId;
-    private String roomName; // Nom de la salle (pour affichage)
+    private String roomName; 
     private LocalDateTime startDateTime;
     private LocalDateTime endDateTime;
-    private String status; // PENDING, CONFIRMED, CANCELLED
+    private String status; 
     private String selectedEquipments;
-    private double totalPrice; // Store the calculated total price
+    private double totalPrice; 
 
     public String getSelectedEquipments() {
         return selectedEquipments;

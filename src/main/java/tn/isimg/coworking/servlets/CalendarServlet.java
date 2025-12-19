@@ -51,7 +51,7 @@ public class CalendarServlet extends HttpServlet {
                 // Filtrer la liste (ou utiliser une méthode DAO spécifique si dispo)
                 reservations = reservations.stream()
                         .filter(r -> r.getRoomId() == roomId)
-                        .toList(); // Java 16+ ou .collect(Collectors.toList()) pour Java 8
+                        .toList(); 
                 request.setAttribute("selectedRoomId", roomId);
             } catch (NumberFormatException e) {
                 // Ignore invalid ID

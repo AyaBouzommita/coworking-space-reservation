@@ -63,6 +63,21 @@ public class ReservationCancelServlet extends HttpServlet {
                         boolean success = reservationDao.cancel(reservationId);
                         if (!success) {
                             errorMessage = "Erreur lors de l'annulation.";
+                        } else {
+                            // Envoi de l'email d'annulation
+                            try {
+                                tn.isimg.coworking.dao.UserDao userDao = new tn.isimg.coworking.dao.UserDao();
+                                //récupérer l'utilisateur de la réservation
+                                User targetUser = (reservation.getUserId() == currentUser.getId()) ? currentUser
+                                        : userDao.findById(reservation.getUserId());
+
+                                if (targetUser != null) {
+                                    tn.isimg.coworking.utils.EmailService emailService = new tn.isimg.coworking.utils.EmailService();
+                                    emailService.sendReservationCancellation(targetUser, reservation);
+                                }
+                            } catch (Exception e) {
+                                e.printStackTrace(); // Log only, don't fail the request
+                            }
                         }
                     }
                 }

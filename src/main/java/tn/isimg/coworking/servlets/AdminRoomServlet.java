@@ -153,9 +153,7 @@ public class AdminRoomServlet extends HttpServlet {
                     // Use a standardized filename: room_{id}.png
                     String fileName = "room_" + roomId + ".png";
 
-                    // Path to src/main/webapp/images/rooms (Best Effort for Dev Mode)
-                    // Note: In real production, this should be an external path.
-                    // Here we save to the deployment path.
+                    // Path to src/main/webapp/images/rooms dans le serveur
                     String uploadPath = getServletContext().getRealPath("") + java.io.File.separator + "images"
                             + java.io.File.separator + "rooms";
 
@@ -165,9 +163,7 @@ public class AdminRoomServlet extends HttpServlet {
 
                     filePart.write(uploadPath + java.io.File.separator + fileName);
 
-                    // Optional: Try to copy to source workspace if running in Eclipse to persist
-                    // across reloads
-                    // This is 'best effort' and might fail if paths differ.
+                    
                 }
             } catch (Exception e) {
                 // Log upload error but don't fail the request
